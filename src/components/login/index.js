@@ -9,12 +9,14 @@ class LoginForm extends Component {
     showErrUserMsg: true,
     showErrPswdMsg: true,
     showSuccessModal: false,
-    showLoader: false,
+    showload:false,
   };
 
   renderLoaderView = () => (
-    <div className="spinner-border text-secondary" role="status">
-      <span className="visually-hidden">Loading...</span>
+    <div className="custom-loader">
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
     </div>
   );
 
@@ -44,14 +46,21 @@ class LoginForm extends Component {
     }
   };
 
-  successLog = (event) => {
+  successLog =(event) => {
     event.preventDefault();
-    const { showSuccessModal, userInValue, pswdInValue } = this.state;
+    const { userInValue, pswdInValue } = this.state;
     if (userInValue !== "" && pswdInValue !== "") {
       this.setState({
-        showSuccessModal: !showSuccessModal,
-        showLoader: true,
+        showSuccessModal: false,
+        showload:true
       });
+      setTimeout(()=> {
+        this.setState({
+          showSuccessModal: true,
+          showload:false
+        });
+      }, 2000)
+      
     }
     if (userInValue === "") {
       this.setState({
@@ -96,6 +105,8 @@ class LoginForm extends Component {
       pswdInValue: event.target.value,
     });
   };
+
+
 
   renderFormView = () => {
     const { showErrPswdMsg, showErrUserMsg, userInValue, pswdInValue } =
@@ -149,14 +160,14 @@ class LoginForm extends Component {
   };
 
   render() {
-    const { showSuccessModal, showLoader } = this.state;
-    console.log(showLoader);
+    const { showSuccessModal,showload } = this.state;
+
     return (
       <div className="home-container fluid-container">
         <HeaderNav />
         <div className=" mt-5 ">
           {!showSuccessModal && this.renderFormView()}
-          {/* {showLoader && this.renderLoaderView()} */}
+          {showload && this.renderLoaderView()}
           {showSuccessModal && this.renderSuccessViewMsg()}
         </div>
       </div>

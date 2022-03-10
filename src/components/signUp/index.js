@@ -11,6 +11,7 @@ class SignUp extends Component {
     showErrPswdMsg: false,
     showErrEmailMsg: false,
     showSuccessModal: false,
+    showLoader:false,
   };
 
   blurName = (event) => {
@@ -81,13 +82,19 @@ class SignUp extends Component {
 
   submitForm = (event) => {
     event.preventDefault();
-    const { nameInValue, pswdInValue, emailInValue, showSuccessModal } =
+    const { nameInValue, pswdInValue, emailInValue} =
       this.state;
     if (nameInValue !== "" && pswdInValue !== "" && emailInValue !== "") {
       this.setState({
-        showSuccessModal: !showSuccessModal,
+        showSuccessModal: false,
         showLoader: true,
       });
+      setTimeout(()=>{
+        this.setState({
+            showSuccessModal: true,
+            showLoader: false,
+        })
+      },2000)
     }
     if (nameInValue === "") {
       this.setState({
@@ -176,17 +183,23 @@ class SignUp extends Component {
     );
   };
 
-  renderBodyView = () => {};
+  renderLoaderView = () => (
+    <div className="custom-loader">
+      <div className="spinner-border text-light" role="status">
+        <span className="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  );
 
   render() {
-    const { showSuccessModal } = this.state;
+    const { showSuccessModal, showLoader } = this.state;
     return (
       <div className="home-container fluid-container">
         <HeaderNav />
         <div className="mt-5">
-          {showSuccessModal
-            ? this.renderSuccessViewMsg()
-            : this.renderFormView()}
+          {showSuccessModal && this.renderSuccessViewMsg() }
+           {showLoader && this.renderLoaderView() }
+          {!showSuccessModal && this.renderFormView()}
         </div>
       </div>
     );
