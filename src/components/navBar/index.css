@@ -1,0 +1,29 @@
+.title-brand {
+  font-family: "Great Vibes", cursive;
+  color: #603601;
+}
+
+.title {
+  font-family: monospace;
+  color: #603601;
+}
+
+@media (max-width: 768px) {
+  .nav-box {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 300px) {
+  .button__sm {
+    flex-direction: column;
+    align-self: flex-start;
+  }
+  .form-btn {
+    margin-bottom: 16px;
+  }
+}
+
+.form-btn {
+  width: 100px;
+}

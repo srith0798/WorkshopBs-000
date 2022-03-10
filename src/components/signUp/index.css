@@ -1,0 +1,37 @@
+.signup-form {
+  height: 480px;
+  width: 424px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  border-radius: 5px;
+}
+
+.success-card {
+  height: 200px;
+  width: 424px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0px 4px 16px 0px #bfbfbf;
+  border-radius: 5px;
+}
+
+.icon-x {
+  align-self: flex-end;
+  font-size: 30px;
+}
+
+.msg-success {
+  text-align: center;
+  position: relative;
+  top: 35px;
+  font-size: 26px;
+}
+
+@media (max-width: 424px) {
+  .signup-form,
+  .success-card {
+    width: 90%;
+  }
+}
